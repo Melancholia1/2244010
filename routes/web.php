@@ -23,7 +23,11 @@ Route::get('/category', function () {
 })->name('category');
 
 Route::get('/blog/{slug}', function ($slug) {
-    return view('blog-details');
+    $article = \App\Models\Article::where('slug', $slug)
+        ->where('status', 'published')
+        ->first();
+    
+    return view('blog-details', ['article' => $article]);
 })->name('blog.show');
 
 Route::get('/contact', function () {

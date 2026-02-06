@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Blog Details - Story')
+@section('title', $article?->meta_title ?? $article?->title ?? 'Blog Details - Story')
+@section('description', $article?->meta_description ?? $article?->excerpt ?? '')
+@section('keywords', $article?->meta_keywords ?? '')
 @section('body-class', 'blog-details-page')
 
 @section('content')
@@ -11,10 +13,9 @@
     <div class="container">
       <div class="row d-flex justify-content-center text-center">
         <div class="col-lg-8">
-          <h1 class="heading-title">Blog Details</h1>
+          <h1 class="heading-title">{{ $article?->title ?? 'Blog Details' }}</h1>
           <p class="mb-0">
-            Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo
-            odio sint voluptas consequatur ut a odio voluptatem.
+            {{ $article?->excerpt ?? '' }}
           </p>
         </div>
       </div>
@@ -24,7 +25,7 @@
     <div class="container">
       <ol>
         <li><a href="{{ route('home') }}">Home</a></li>
-        <li class="current">Blog Details</li>
+        <li class="current">{{ $article?->title ?? 'Blog Details' }}</li>
       </ol>
     </div>
   </nav>
